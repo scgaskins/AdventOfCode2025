@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="InputFiles\Day1\" />
+    <Folder Include="InputFiles\" />
   </ItemGroup>
 
 </Project>
