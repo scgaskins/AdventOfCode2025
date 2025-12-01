@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AdventOfCode2025.Solutions.Day1
 {
-    internal class Day1Part1 : ISolution
+    internal class Day1Part2 : ISolution
     {
         private String filePath;
 
-        public Day1Part1(String filePath)
+        public Day1Part2(String filePath)
         {
             this.filePath = filePath;
         }
@@ -25,16 +25,20 @@ namespace AdventOfCode2025.Solutions.Day1
                 if (line[0] == 'R')
                 {
                     dial += value;
+                    zeroCount += dial / 100;
                 }
                 else
                 {
+                    int start = dial;
                     dial -= value;
+                    if (dial <= 0)
+                    {
+                        if (start != 0)
+                            zeroCount += 1;
+                        zeroCount += (-dial) / 100;
+                    }
                 }
                 dial = (dial % 100 + 100) % 100;
-                if (dial == 0)
-                {
-                    zeroCount++;
-                }
             }
             return zeroCount;
         }

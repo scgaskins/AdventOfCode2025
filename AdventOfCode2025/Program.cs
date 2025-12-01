@@ -78,6 +78,8 @@ namespace AdventOfCode2025
             {
                 if (part == 1)
                     return new Day1Part1(filePath);
+                else if (part == 2)
+                    return new Day1Part2(filePath);
             }
             return null;
         }
