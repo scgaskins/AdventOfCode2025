@@ -8,14 +8,8 @@ namespace AdventOfCode2025.Solutions.Day1
 {
     internal class Day1Part2 : ISolution
     {
-        private String filePath;
 
-        public Day1Part2(String filePath)
-        {
-            this.filePath = filePath;
-        }
-
-        public long Solve()
+        public long Solve(String filePath)
         {
             int dial = 50;
             int zeroCount = 0;

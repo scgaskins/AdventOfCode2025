@@ -8,6 +8,6 @@ namespace AdventOfCode2025.Solutions
 {
     internal interface ISolution
     {
-        public long Solve();
+        public long Solve(String filePath);
     }
 }

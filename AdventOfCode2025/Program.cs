@@ -21,7 +21,7 @@ namespace AdventOfCode2025
                     Console.WriteLine("Could not find solution.");
                 else
                 {
-                    Console.WriteLine(solution.Solve());
+                    Console.WriteLine(solution.Solve(filePath));
                 }
                 if (ReadBoolFromUser("Do you want to quit the program?"))
                     break;
@@ -78,15 +78,15 @@ namespace AdventOfCode2025
             if (day == 1)
             {
                 if (part == 1)
-                    return new Day1Part1(filePath);
+                    return new Day1Part1();
                 else if (part == 2)
-                    return new Day1Part2(filePath);
+                    return new Day1Part2();
             } else if (day == 2)
             {
                 if (part == 1)
-                    return new Day2Part1(filePath);
+                    return new Day2Part1();
                 else if (part == 2)
-                    return new Day2Part2(filePath);
+                    return new Day2Part2();
             }
                 return null;
         }

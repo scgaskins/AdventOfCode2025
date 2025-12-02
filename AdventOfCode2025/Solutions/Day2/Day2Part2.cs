@@ -8,14 +8,8 @@ namespace AdventOfCode2025.Solutions.Day2
 {
     internal class Day2Part2 : ISolution
     {
-        private String filePath;
 
-        public Day2Part2(String filePath)
-        {
-            this.filePath = filePath;
-        }
-
-        public long Solve()
+        public long Solve(String filePath)
         {
             long sum = 0;
             Range[] ranges = File.ReadAllText(filePath).Split(",").Select((p) => new Range(p)).ToArray();
