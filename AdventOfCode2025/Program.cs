@@ -1,5 +1,6 @@
 ﻿using AdventOfCode2025.Solutions;
 using AdventOfCode2025.Solutions.Day1;
+using AdventOfCode2025.Solutions.Day2;
 
 namespace AdventOfCode2025
 {
@@ -80,8 +81,12 @@ namespace AdventOfCode2025
                     return new Day1Part1(filePath);
                 else if (part == 2)
                     return new Day1Part2(filePath);
+            } else if (day == 2)
+            {
+                if (part == 1)
+                    return new Day2Part1(filePath);
             }
-            return null;
+                return null;
         }
     }
 }
