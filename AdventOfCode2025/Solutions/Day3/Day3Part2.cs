@@ -51,7 +51,7 @@ namespace AdventOfCode2025.Solutions.Day3
             HashSet<int>[] finalDigits = new HashSet<int>[10];
             for (int i = 0; i < finalDigits.Length; i++)
                 finalDigits[i] = new HashSet<int>();
-            finalDigits[9] = finalDigits[9].Union(digitIndices[9]).ToHashSet();
+            finalDigits[9] = finalDigits[9].Union(digitIndices[9].Take(12)).ToHashSet();
             int totalUsed = finalDigits[9].Count();
             Console.WriteLine("Total used: " + totalUsed);
             int lastIndex = finalDigits[9].LastOrDefault(-1);
@@ -60,6 +60,7 @@ namespace AdventOfCode2025.Solutions.Day3
             {
                 for (int currentDigit = 8; currentDigit >= 0; currentDigit--)
                 {
+                    bool addedDigit = false;
                     for (int i = digitIndices[currentDigit].Count - 1; i >= 0; i--)
                     {
                         int digitIndex = digitIndices[currentDigit][i];
@@ -67,12 +68,16 @@ namespace AdventOfCode2025.Solutions.Day3
                         {
                             finalDigits[currentDigit].Add(digitIndex);
                             totalUsed++;
+                            addedDigit = true;
                             if (totalUsed == 12)
                             {
                                 return finalDigits.Aggregate((s1, s2) => s1.Union(s2).ToHashSet()).Order().ToArray();
                             }
+                            break;
                         }
                     }
+                    if (addedDigit)
+                        break;
                 }
             }
             return finalDigits.Aggregate((s1, s2) => s1.Union(s2).ToHashSet()).Order().ToArray();
