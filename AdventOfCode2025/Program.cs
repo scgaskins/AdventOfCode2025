@@ -92,6 +92,8 @@ namespace AdventOfCode2025
             {
                 if (part == 1)
                     return new Day3Part1();
+                else if (part == 2)
+                    return new Day3Part2();
             }
                 return null;
         }
