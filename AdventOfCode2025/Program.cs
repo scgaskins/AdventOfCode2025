@@ -6,6 +6,7 @@ using AdventOfCode2025.Solutions.Day4;
 using AdventOfCode2025.Solutions.Day5;
 using AdventOfCode2025.Solutions.Day6;
 using AdventOfCode2025.Solutions.Day7;
+using AdventOfCode2025.Solutions.Day8;
 
 namespace AdventOfCode2025
 {
@@ -122,6 +123,10 @@ namespace AdventOfCode2025
                     return new Day7Part1();
                 else if (part == 2)
                     return new Day7Part2();
+            } else if (day == 8)
+            {
+                if (part == 1)
+                    return new Day8Part1();
             }
                 return null;
         }
