@@ -11,34 +11,55 @@ namespace AdventOfCode2025.Solutions.Day8
         public long Solve(string filePath)
         {
             List<Pair<Coordinate>> pairs = ReadInCoordinates(filePath);
-            List<HashSet<Coordinate>> circuits = [];
             int numConnections = filePath.Contains("test.txt") ? 10 : 1000;
+            List<HashSet<Coordinate>> circuits = ConnectCircuits(pairs, numConnections);
+            circuits.Sort((a, b) => a.Count.CompareTo(b.Count));
+            return circuits.TakeLast(3).Select((c) => c.Count).Aggregate((a, b) => a * b);
+        }
+
+        List<HashSet<Coordinate>> ConnectCircuits(List<Pair<Coordinate>> pairs, int numConnections)
+        {
+            Dictionary<int, HashSet<Coordinate>> circuits = [];
+            Dictionary<Coordinate, int> coordToIndex = [];
+            int idCounter = 0;
             foreach (Pair<Coordinate> pair in pairs.Take(numConnections))
             {
-                int firstIndex = -1;
-                int secondIndex = -1;
-                for (int i=0; i<circuits.Count; i++)
-                {
-                    if (circuits[i].Contains(pair.A))
-                        firstIndex = i;
-                    if (circuits[i].Contains(pair.B))
-                        secondIndex = i;
-                }
+                int firstIndex = coordToIndex.GetValueOrDefault(pair.A, -1);
+                int secondIndex = coordToIndex.GetValueOrDefault(pair.B, -1);
+                int finalIndex;
                 if (firstIndex == -1 && secondIndex == -1)
-                    circuits.Add([pair.A, pair.B]);
+                {
+                    circuits.Add(idCounter, [pair.A, pair.B]);
+                    finalIndex = idCounter;
+                    idCounter++;
+                }
                 else if (firstIndex == -1)
+                {
                     circuits[secondIndex].Add(pair.A);
+                    finalIndex = secondIndex;
+                }
                 else if (secondIndex == -1)
+                {
                     circuits[firstIndex].Add(pair.B);
+                    finalIndex = firstIndex;
+                }
                 else if (firstIndex != secondIndex)
                 {
                     HashSet<Coordinate> firstCircuit = circuits[firstIndex];
                     circuits[secondIndex].UnionWith(firstCircuit);
-                    circuits.RemoveAt(firstIndex);
+                    circuits.Remove(firstIndex);
+                    finalIndex = secondIndex;
+                    foreach (Coordinate coord in firstCircuit)
+                        coordToIndex[coord] = finalIndex;
                 }
+                else
+                {
+                    finalIndex = firstIndex;
+                }
+                coordToIndex[pair.A] = finalIndex;
+                coordToIndex[pair.B] = finalIndex;
             }
-            circuits.Sort((a, b) => a.Count.CompareTo(b.Count));
-            return circuits.TakeLast(3).Select((c) => c.Count).Aggregate((a, b) => a * b);
+            return circuits.Values.ToList();
         }
 
         private List<Pair<Coordinate>> ReadInCoordinates(string filePath)
